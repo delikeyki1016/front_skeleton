@@ -1,3 +1,4 @@
 hello world 
 local edit 2 
 hello world edit 1 
+remote fetch test 
