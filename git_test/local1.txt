@@ -1,4 +1,0 @@
-hello world 
-local edit 3333
-hello world edit 1 
-remote fetch test 
