@@ -1,3 +1,4 @@
+// 로컬에서 수정
 const express = require('express')
 const path = require('path')
 const morgan = require('morgan')
@@ -11,7 +12,7 @@ const homeRouter = require('./home/homeRouter')
 
 const app = express()
 
-// nunjucks 설정
+// nunjucks 등록 및 설정
 app.set('view engine', 'html')
 nunjucks.configure('common/views', {
     express: app,
@@ -29,7 +30,7 @@ app.use(express.urlencoded({extended: true})) //http요청의 body parser(즉 fo
 // 개발자가 각 파일로 분리시킨 라우터 등록
 app.use('/', homeRouter)
 
-// 위에서 안걸린 요청 404
+// 위에서 안걸린 요청은 404로 처리
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`)
     error.status = 404
