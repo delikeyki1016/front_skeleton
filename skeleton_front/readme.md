@@ -19,13 +19,22 @@
 - pull받아 충돌해결 후, 다시 add, commit, push 
 
 
->npm init vite skeleton_front -- --template react
-해당 폴더로 이동 후 
->npm install 
-부가 모듈 설치
->npm install axios bootstrap react-router react-router-dom styled-component
->부트스트랩 프리템플릿 다운로드 (bootstrapmade > estateagency)
+## 설계 
+# 폴더 구조 설계 
+# database table 설계 
+# url data table 
+# request, response data 설계 
 
-# public 폴더 : 컴포넌트와 상관없이 html에 포함되어 서비스되는 파일들
-# src 폴더 : 컴포넌트에서 import되는 파일들 
-# vendor 폴더 : 부트스트랩 템플릿을 제공하는 곳에서 만든 무언가를 담자
+
+## 개발환경세팅
+>npm init vite skeleton_front -- --template react
+- 해당 폴더로 이동 후 
+>npm install 
+- 부가 모듈 설치
+>npm install axios bootstrap react-router react-router-dom styled-component
+- 부트스트랩 프리템플릿 다운로드 (bootstrapmade > estateagency)
+
+# 폴더 
+- public 폴더 : 컴포넌트와 상관없이 html에 포함되어 서비스되는 파일들
+- src 폴더 : 컴포넌트에서 import되는 파일들 
+- vendor 폴더 : 부트스트랩 템플릿을 제공하는 곳에서 만든 무언가를 담자

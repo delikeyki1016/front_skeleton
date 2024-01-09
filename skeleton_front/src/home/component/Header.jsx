@@ -19,11 +19,11 @@ const Header = () => {
                         <ul className="navbar-nav">
 
                         <li className="nav-item">
-                            <Link className="nav-link active" to={'/'}>Home</Link>
+                            <Link className="nav-link active" to='/'>Home</Link>
                         </li>
 
                         <li className="nav-item">
-                            <Link className="nav-link " to={'/about'}>About</Link>
+                            <Link className="nav-link " to='/user/signup'>SignUp</Link>
                         </li>
 
                         <li className="nav-item">
