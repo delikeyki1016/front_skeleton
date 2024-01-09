@@ -1,4 +1,4 @@
-// 로컬에서 수정
+//초기 설정
 const express = require('express')
 const path = require('path')
 const morgan = require('morgan')
