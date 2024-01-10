@@ -12,10 +12,11 @@ const BoardList = () => {
         const resp = await axios.get('http://localhost:8000/boards/boardList')
         if(resp.data.status === 500) window.alert('목록 조회 실패')
         else {
-            console.log(resp.data)
+            // console.log(resp.data)
             setBoardList(resp.data)
+            // console.log('boardList.data:', boardList.data)
         }
-    }, [])
+    }, []) // [] : 최초에 한번 생성되게 하려고. [] 안해주면 서버가 계속 도는 것 같다. 
 
     useEffect(()=>{
         // 서버에서 최초에 한번만 데이터를 받아오면 된다.
