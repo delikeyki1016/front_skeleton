@@ -22,5 +22,6 @@ CREATE TABLE IF NOT EXISTS board (
 INSERT INTO board (name, title, content) VALUES ('홍길동', '첫번째 게시물', '첫번째 게시물 내용입니다...');
 INSERT INTO board (name, title, content) VALUES ('둘리', '두번째 게시물', '두번째 게시물 내용입니다...');
 INSERT INTO board (name, title, content) VALUES ('또치', '세번째 게시물', '세번째 게시물 내용입니다...');
+INSERT INTO board (name, title, content) VALUES ('고길동', '네번째 게시물', '네번째 게시물 내용입니다...');
 
 select * from board ORDER BY id DESC;

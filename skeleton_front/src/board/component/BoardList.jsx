@@ -3,32 +3,24 @@ import axios from "axios"
 
 const BoardList = () => {
 
-    const [trList, setTrList] = useState([])
+    const [boardList, setBoardList] = useState({
+        status:'', message:'', data:[]
+    })
 
-    const fetchlist = useCallback(async ()=>{
+    const getBoardList = useCallback(async ()=>{
         // 서버연동
         const resp = await axios.get('http://localhost:8000/boards/boardList')
         if(resp.data.status === 500) window.alert('목록 조회 실패')
         else {
-            const list_array = resp.data.data
-            // console.log(list_array)
-            const trList = list_array.map((item) => {
-                const [date, time] = item.createdAt.split('T')
-                return <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.title}</td>
-                    <td>{item.name}</td>
-                    <td>{date} {time.substring(0, 8)}</td>
-                    <td>{item.cnt}</td>
-                </tr>
-            })
-            setTrList(trList)
+            console.log(resp.data)
+            setBoardList(resp.data)
         }
     }, [])
 
     useEffect(()=>{
-        fetchlist()
-    }, [fetchlist])
+        // 서버에서 최초에 한번만 데이터를 받아오면 된다.
+        getBoardList()
+    }, [getBoardList])
 
     return (
         <main id="main">
@@ -72,12 +64,20 @@ const BoardList = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {trList}
+                                    {boardList.data.map((item) => (
+                                        <tr key={item.id}>
+                                            <td>{item.id}</td>
+                                            <td>{item.title}</td>
+                                            <td>{item.name}</td>
+                                            <td>{item.createdAt}</td>
+                                            <td>{item.cnt}</td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <td colSpan={5} className="text-end">
-
+                                            <button className='btn btn-primary'>ADD</button>
                                         </td>
                                     </tr>
                                 </tfoot>
