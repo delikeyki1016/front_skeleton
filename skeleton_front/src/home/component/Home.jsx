@@ -201,6 +201,7 @@ const Home = () => {
                     <div className="col-md-4">
                         <div className="card-box-d">
                         <div className="card-img-d">
+                            {/* Home.jsx 컴포넌트가 라우팅되는 조건이 http://localhost:5173/ */}
                             <img src="images/agent-4.jpg" alt="" className="img-d img-fluid" />
                         </div>
                         <div className="card-overlay card-overlay-hover">

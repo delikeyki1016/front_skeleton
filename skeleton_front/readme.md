@@ -3,9 +3,9 @@
 
 # git bash
 - 파일생성 
-- git add .
-- git commit -m "커밋메시지"
-- git push -u origin main (-u는 최초에 한번하면 이후는 생략가능)
+>git add .
+>git commit -m "커밋메시지"
+>git push -u origin main (-u는 최초에 한번하면 이후는 생략가능)
 
 # 강제 풀 
 - git pull origin main 
@@ -17,6 +17,17 @@
 
 # 충돌났을때
 - pull받아 충돌해결 후, 다시 add, commit, push 
+
+# 특정 파일 복구하기
+- 방법1
+> 새폴더를 생성해서 clone해온 후 
+>git reset --hard 로그번호
+> 되돌려서 파일 획득, 원래 작업폴더에 파일 추가
+
+- 방법2
+>git reset --hard 로그번호
+>git push -f origin main ==> -f 강제로 올림(주의!!!! 해당로그로 전체가 변경되기 때문에 권장하지않음)
+
 
 
 ## 설계 

@@ -1,4 +1,31 @@
+import React, { useCallback, useState } from 'react'
+import { useNavigate } from 'react-router'
+import axios from 'axios'
+
 const SignUp = ()=>{
+
+    // url path 조정
+    const navigate = useNavigate()
+
+    // 유저입력값을 controlled component 로 설정
+    const [data, setData] = useState({name:'', email:'', password:''})
+    // 빈 의존성 배열 []은 함수가 외부 변수에 의존하지 않음을 나타냅니다. 따라서 이 함수는 한 번만 생성됩니다.
+    const changeData = useCallback((e) => {
+        // 현재 상태(data)를 받아와서 새로운 상태 객체를 반환
+        setData((data)=> ({...data, [e.target.name]: e.target.value}))
+    }, [])
+    // submit 버튼 클릭 이벤트, 
+    // 해당함수가 빈번하게 생성되는 것을 막기위해 useCallback 사용 [data, navigate]가 변경될 때만 해당 함수를 생성
+    const signup = useCallback(async (e)=>{
+        e.preventDefault()
+        console.log(data)
+        // 서버연동
+        const resp = await axios.post('http://localhost:8000/users/signup', data)
+        if(resp.data.status === 500) window.alert('사용자가 존재합니다.')
+        // 첫화면으로 화면전환
+        else navigate('/')
+    }, [data, navigate])
+
     return (
         <main id="main">
 
@@ -8,7 +35,7 @@ const SignUp = ()=>{
                 <div className="row">
                 <div className="col-md-12 col-lg-8">
                     <div className="title-single-box">
-                    <h1 className="title-single">We Do Great Design For Creative Folks</h1>
+                    <h1 className="title-single">Sign Up</h1>
                     </div>
                 </div>
                 <div className="col-md-12 col-lg-4">
@@ -18,7 +45,7 @@ const SignUp = ()=>{
                         <a href="#">Home</a>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                        About
+                        SignUp
                         </li>
                     </ol>
                     </nav>
@@ -31,53 +58,29 @@ const SignUp = ()=>{
             {/* <!-- ======= About Section ======= --> */}
             <section className="section-about">
             <div className="container">
-                <div className="row">
-                <div className="col-sm-12 position-relative">
-                    <div className="about-img-box">
-                    <img src="images/slide-about-1.jpg" alt="" className="img-fluid" />
+                {/* ajax로 서버에 유저 입력데이터를 전송 */}
+                {/* ajax에서 서버url 지정, http request method를 지정한다. 따라서 여기서는 속성 지정이 필요없다. */}
+                <form className="row">
+                    <div className="col-sm12 position-relative form-group mb-3">
+                        <label htmlFor="email" className="form-label">Email</label>
+                        <input type="text" className="form-control" id="email" name="email" 
+                        value={data.email} onChange={changeData} />
                     </div>
-                    <div className="sinse-box">
-                    <h3 className="sinse-title">EstateAgency
-                        <span></span>
-                        <br/> Sinse 2017
-                    </h3>
-                    <p>Art & Creative</p>
+                    <div className="col-sm12 position-relative form-group mb-3">
+                        <label htmlFor="password" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="password" name="password" 
+                        value={data.password} onChange={changeData} />
                     </div>
-                </div>
-                <div className="col-md-12 section-t8 position-relative">
-                    <div className="row">
-                    <div className="col-md-6 col-lg-5">
-                        <img src="images/about-2.jpg" alt="" className="img-fluid" />
+                    <div className="col-sm12 position-relative form-group mb-3">
+                        <label htmlFor="name" className="form-label">Name</label>
+                        <input type="text" className="form-control" id="name" name="name"
+                        value={data.name} onChange={changeData} />
                     </div>
-                    <div className="col-lg-2  d-none d-lg-block position-relative">
-                        <div className="title-vertical d-flex justify-content-start">
-                        <span>EstateAgency Exclusive Property</span>
-                        </div>
+                    <div className="col-sm12 position-relative form-group">
+                        <button type="submit" className="btn btn-danger btn-sm" onClick={signup}>Send</button>
+                        <button type="reset" className="btn btn-primary btn-sm">Reset</button>
                     </div>
-                    <div className="col-md-6 col-lg-5 section-md-t3">
-                        <div className="title-box-d">
-                        <h3 className="title-d">Sed
-                            <span className="color-d">porttitor</span> lectus
-                            <br/> nibh.
-                        </h3>
-                        </div>
-                        <p className="color-text-a">
-                        Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus magna justo, lacinia eget
-                        consectetur sed, convallis
-                        at tellus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum
-                        ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit
-                        neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
-                        </p>
-                        <p className="color-text-a">
-                        Sed porttitor lectus nibh. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.
-                        Mauris blandit aliquet
-                        elit, eget tincidunt nibh pulvinar a. Vivamus magna justo, lacinia eget consectetur sed,
-                        convallis at tellus.
-                        </p>
-                    </div>
-                    </div>
-                </div>
-                </div>
+                </form>
             </div>
             </section>
         
@@ -97,7 +100,10 @@ const SignUp = ()=>{
                 <div className="col-md-4">
                     <div className="card-box-d">
                     <div className="card-img-d">
-                        <img src="images/agent-7.jpg" alt="" className="img-d img-fluid" />
+                        {/* signup.jsx 컴포넌트가 라우팅되는 조건이http:// localhost:5173/user/ 이다. 
+                        따라서 이미지경로가 http:// localhost:5173/user/images/ 로 지정되기 때문에 
+                        이미지 경로를 /루트로 설정해줘야 함 */}
+                        <img src="/images/agent-7.jpg" alt="" className="img-d img-fluid" />
                     </div>
                     <div className="card-overlay card-overlay-hover">
                         <div className="card-header-d">
@@ -153,7 +159,7 @@ const SignUp = ()=>{
                 <div className="col-md-4">
                     <div className="card-box-d">
                     <div className="card-img-d">
-                        <img src="images/agent-6.jpg" alt="" className="img-d img-fluid" />
+                        <img src="/images/agent-6.jpg" alt="" className="img-d img-fluid" />
                     </div>
                     <div className="card-overlay card-overlay-hover">
                         <div className="card-header-d">
@@ -214,7 +220,7 @@ const SignUp = ()=>{
                 <div className="col-md-4">
                     <div className="card-box-d">
                     <div className="card-img-d">
-                        <img src="images/agent-5.jpg" alt="" className="img-d img-fluid" />
+                        <img src="/images/agent-5.jpg" alt="" className="img-d img-fluid" />
                     </div>
                     <div className="card-overlay card-overlay-hover">
                         <div className="card-header-d">

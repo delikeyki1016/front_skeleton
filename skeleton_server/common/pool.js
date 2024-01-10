@@ -7,11 +7,12 @@
 // mysql 연동 드라이버
 const mysql = require('mysql2/promise')
 
-let pool
+let pool = null
 
 // 앱에서 dbms 작업이 필요하면 이 함수를 호출해서 connection을 얻어 실행 
 module.exports = function getPool() {
-    console.log('pool', pool)
+    // console.log('pool', pool)
+    // pool이 있는 케이스?
     if(pool) return pool
     //pool이 없다면, 초기 pool 구성, 즉 초기 connection을 원하는 갯수만큼 만들어서 유지.
     const config = {
@@ -22,5 +23,7 @@ module.exports = function getPool() {
         database: process.env.DB_DATABASE,
         connectionLimit: 10,
     }
-    return mysql.createPool(config)
+    pool = mysql.createPool(config)
+    return pool
+    // return mysql.createPool(config)
 }
