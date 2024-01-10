@@ -12,6 +12,7 @@ const SignUp = ()=>{
     // 빈 의존성 배열 []은 함수가 외부 변수에 의존하지 않음을 나타냅니다. 따라서 이 함수는 한 번만 생성됩니다.
     const changeData = useCallback((e) => {
         // 현재 상태(data)를 받아와서 새로운 상태 객체를 반환
+        // 현재 상태의 얕은 복사본을 생성하고, 이벤트를 트리거한 입력 필드에 해당하는 속성을 업데이트
         setData((data)=> ({...data, [e.target.name]: e.target.value}))
     }, [])
     // submit 버튼 클릭 이벤트, 

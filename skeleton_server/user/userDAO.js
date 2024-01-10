@@ -69,19 +69,19 @@ const userDAO = {
             console.log('3. user', user)
             if(!user[0]) {
                 // db에 데이터가 없다. 유저가 입력한 이메일이 잘못되었다는 이야기.
-                callback({status:500, message: '아이디,패스워드를 확인해주세요.'})
+                callback({status:500, message: '아이디를 확인해주세요.'})
             } else {
                 // db에 데이터가 있다. 유저입력 비밀번호와 db의 비밀번호를 비교
                 console.log('유저입력 패스워드:', password, 'DB 입력되있는 패스워드:', user[0].password)
                 // db에는 비밀번호가 해시로 저장되어있기 때문에, 유저입력 비밀번호를 해시로 만들어서 비교해야 한다.
                 bcrypt.compare(password, user[0].password, async (error, result)=>{
                     if(error) {
-                        callback({status:500, message: '아이디, 패스워드를 확인해주세요'})
+                        callback({status:500, message: '패스워드를 확인해주세요'})
                     } else if(result) {
                         console.log('4. result', result)
                         callback({status:200, message: 'OK', data:{name: user[0].name}, email: user[0].email})
                     } else {
-                        callback({status:500, message: '아이디, 패스워드를 확인해주세요'}) 
+                        callback({status:500, message: '패스워드를 확인해주세요'}) 
                     }
                 })
             }
