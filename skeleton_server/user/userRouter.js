@@ -12,8 +12,8 @@ router.post('/signup', async (req, res, next) => {
     })
 })
 
-router.post('/signin', async (req, res, next) => {
-    console.log('login router, signIn으로 접속되었다')
+router.post('/signin', async (req, res, next) => { // async 없어도 됨
+    console.log('user router, signIn으로 접속되었다')
     // front 전달 데이터 획득
     const data = req.body
     userDAO.login(data, (resp) => {

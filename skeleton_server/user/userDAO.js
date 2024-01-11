@@ -14,7 +14,6 @@ const userDAO = {
     // callback : DBMS가 성공한 후에 호출할 개발자 함수
     signup: async (item, callback) => {
         // console.log('user DAO, signup이 콜되었다.')
-        // callback()
         let conn = null
         try {
             // 정상실행 로직
@@ -79,7 +78,7 @@ const userDAO = {
                         callback({status:500, message: '패스워드를 확인해주세요'})
                     } else if(result) {
                         console.log('4. result', result)
-                        callback({status:200, message: 'OK', data:{name: user[0].name}, email: user[0].email})
+                        callback({status:200, message: 'OK', data:{name: user[0].name, email: user[0].email}})
                     } else {
                         callback({status:500, message: '패스워드를 확인해주세요'}) 
                     }

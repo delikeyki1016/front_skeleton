@@ -6,6 +6,7 @@ const BoardDetail = () => {
 
     const navigate = useNavigate()
     // 라우터에 의해 내가 출력되었는데, 출력시킨 path 조건에서 데이터 획득
+    // 즉 자신은 board/8 이런 구조의 url에 의해 실행. 8 값 획득
     const {id} = useParams()
     // console.log(id)
 
@@ -27,7 +28,7 @@ const BoardDetail = () => {
     }, []) //[getBoard] 로 써도 된다
 
     // 삭제 함수
-    const deleteBoard = useCallback(async (id) => {
+    const deleteBoard = useCallback(async () => {
         // 서버연동
         await axios.post('http://localhost:8000/boards/delete/'+id)
         navigate('/board/list')
@@ -91,7 +92,7 @@ const BoardDetail = () => {
                                             onClick={()=>navigate('/board/update/'+id)}>수정</button>
                                             {" "}
                                             <button type='button' className="btn btn-warning btn-sm" 
-                                            onClick={()=>deleteBoard(id)}>삭제</button> 
+                                            onClick={deleteBoard}>삭제</button> 
                                             {/* button type="submit" 의 경우 이벤트를 막지않으면 항상 브라우저를 갱신한다. */}
                                         </td>
                                     </tr>

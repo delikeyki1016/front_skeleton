@@ -27,7 +27,7 @@ router.post('/insert', function(req, res, next) {
 
 // http://localhost:8000/boards/board/8 
 router.get('/board/:id', function(req, res, next) {
-    const { id } = req.params
+    const id = req.params.id
     console.log('상세보기id:', id)
     boardDAO.board(id, (resp) => {
         res.json(resp)

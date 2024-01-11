@@ -15,7 +15,7 @@ const boardDAO = {
         let conn = null
         try {
             conn = await getPool().getConnection()
-            const [respList] = await conn.query(sql.boardList) 
+            const [respList] = await conn.query(sql.boardList)  // (sql.boardList, []) 동일
             // console.log(respList)
             callback({status:200, message: 'OK', data:respList})
             // if (respList[0]) {
@@ -24,7 +24,7 @@ const boardDAO = {
             //     callback({status:500, message: 'board 목록 조회 실패'})
             // }
         } catch(error) {
-            return {status: 500, message: 'board 목록 조회 실패', error: error}
+            return {status: 500, message: '목록 조회 실패', error: error}
         } finally {
             if(conn !== null) conn.release()
         }
@@ -40,7 +40,7 @@ const boardDAO = {
             callback({status:200, message: 'OK', data: resp})
         } catch(error) {
             console.log(error)
-            return {status: 500, message: 'board 입력 실패', error: error}
+            return {status: 500, message: '입력 실패', error: error}
         } finally {
             if(conn !== null) conn.release()
         }
@@ -57,7 +57,7 @@ const boardDAO = {
             callback({status:200, message: 'OK', data: resp[0]})
         } catch(error) {
             console.log(error)
-            return {status: 500, message: '해당 board 조회 실패', error: error}
+            return {status: 500, message: '조회 실패', error: error}
         } finally {
             if(conn !== null) conn.release()
         }
@@ -73,7 +73,7 @@ const boardDAO = {
             callback({status:200, message: 'OK', data: resp}) //  data: resp 데이터 전달은 안해도 된다.
         } catch(error) {
             console.log(error)
-            return {status: 500, message: '해당 board 삭제 실패', error: error}
+            return {status: 500, message: '삭제 실패', error: error}
         } finally {
             if(conn !== null) conn.release()
         }
@@ -89,7 +89,7 @@ const boardDAO = {
             callback({status:200, message: 'OK', data: resp}) //  data: resp 데이터 전달은 안해도 된다.
         } catch(error) {
             console.log(error)
-            return {status: 500, message: '해당 board 수정 실패', error: error}
+            return {status: 500, message: '수정 실패', error: error}
         } finally {
             if(conn !== null) conn.release()
         }

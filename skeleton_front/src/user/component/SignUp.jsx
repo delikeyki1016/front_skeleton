@@ -61,7 +61,7 @@ const SignUp = ()=>{
             <div className="container">
                 {/* ajax로 서버에 유저 입력데이터를 전송 */}
                 {/* ajax에서 서버url 지정, http request method를 지정한다. 따라서 여기서는 속성 지정이 필요없다. */}
-                <form className="row">
+                {/* <form className="row"> 폼이 없어도 된다. */}
                     <div className="col-sm12 position-relative form-group mb-3">
                         <label htmlFor="email" className="form-label">Email</label>
                         <input type="text" className="form-control" id="email" name="email" 
@@ -82,7 +82,7 @@ const SignUp = ()=>{
                         {" "}
                         <button type="reset" className="btn btn-primary btn-sm" onClick={()=>setData({name:'', email:'', password:''})}>Reset</button>
                     </div>
-                </form>
+                {/* </form> */}
             </div>
             </section>
         
@@ -103,8 +103,8 @@ const SignUp = ()=>{
                     <div className="card-box-d">
                     <div className="card-img-d">
                         {/* signup.jsx 컴포넌트가 라우팅되는 조건이http:// localhost:5173/user/ 이다. 
-                        따라서 이미지경로가 http:// localhost:5173/user/images/ 로 지정되기 때문에 
-                        이미지 경로를 /루트로 설정해줘야 함 */}
+                        따라서 이미지경로가 http:// localhost:5173/user/images/ 로 설정되기 때문에 
+                        이미지 경로를 /루트로 설정해줘야 public/images/로 정상출력된다 */}
                         <img src="/images/agent-7.jpg" alt="" className="img-d img-fluid" />
                     </div>
                     <div className="card-overlay card-overlay-hover">
