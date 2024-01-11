@@ -8,8 +8,8 @@ const BoardInsert = ()=>{
     const [data, setData] = useState({name:'', title:'', content:''})
 
     const changeData = useCallback((e) => {
-        setData((data)=> ({...data, [e.target.name]: e.target.value}))
-    }, [])
+        setData({...data, [e.target.name]: e.target.value})
+    }, [data])
 
     const boardInsert = useCallback(async (e)=>{
         e.preventDefault()
@@ -80,7 +80,8 @@ const BoardInsert = ()=>{
                                         <td colSpan="2" className="text-end">
                                             {/* 입력한 내용 취소 */}
                                             {/* <button type='reset' className="btn btn-primary btn-sm" onClick={()=>setData({name:'', title:'', content:''})}>취소</button> */}
-                                            <Link to='/board/list'><button type='button' className="btn btn-primary btn-sm">취소</button></Link>
+                                            {/* <Link to='/board/list'><button type='button' className="btn btn-primary btn-sm">취소</button></Link> */}
+                                            <button type='button' className="btn btn-primary btn-sm" onClick={()=>navigate('/board/list')}>취소</button>
                                             {" "}
                                             <button type='submit' className="btn btn-warning btn-sm" onClick={boardInsert}>입력</button>
                                         </td>

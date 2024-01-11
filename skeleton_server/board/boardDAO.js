@@ -4,6 +4,7 @@ const getPool = require('../common/pool')
 const sql = {
     boardList: 'SELECT * FROM board ORDER BY id DESC',
     insert: 'INSERT INTO board (name, title, content) VALUES (?, ?, ?)',
+    board: 'SELECT * FROM board WHERE id = ?',
 }
 
 const boardDAO = {
@@ -33,10 +34,27 @@ const boardDAO = {
             conn = await getPool().getConnection()
             console.log('Board Insert DAO', item)
             const [resp] = await conn.query(sql.insert, [item.name, item.title, item.content]) 
-            console.log(resp)
+            // console.log(resp)
             callback({status:200, message: 'OK', data: resp})
         } catch(error) {
+            console.log(error)
             return {status: 500, message: 'board 입력 실패', error: error}
+        } finally {
+            if(conn !== null) conn.release()
+        }
+    },
+    
+    board: async (id, callback) => {
+        let conn = null
+        try {
+            conn = await getPool().getConnection()
+            console.log('Board select id DAO', id)
+            const [resp] = await conn.query(sql.board, id) 
+            // console.log(resp)
+            callback({status:200, message: 'OK', data: resp})
+        } catch(error) {
+            console.log(error)
+            return {status: 500, message: '해당 board 조회 실패', error: error}
         } finally {
             if(conn !== null) conn.release()
         }

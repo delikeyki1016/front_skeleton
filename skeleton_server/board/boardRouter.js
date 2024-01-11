@@ -14,10 +14,22 @@ router.get('/boardList', function(req, res, next) {
     })
 })
 
-router.post('/insert', async (req, res, next) => {
+// http://localhost:8000/boards/insert
+router.post('/insert', function(req, res, next) {
     console.log('board router, insert가 호출')
+    // post방식은 request body를 통해서 데이터를 전달하는 방식
     const data = req.body
     boardDAO.insert(data, (resp) => {
+        res.send(resp)
+        //res.json(resp) 으로 가능
+    })
+})
+
+// http://localhost:8000/boards/board/8 
+router.get('/board/:id', function(req, res, next) {
+    const { id } = req.params
+    console.log('board/:id 호출', id)
+    boardDAO.board(id, (resp) => {
         res.send(resp)
     })
 })

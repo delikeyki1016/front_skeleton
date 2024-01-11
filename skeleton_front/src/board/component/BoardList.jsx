@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Outlet, useMatch } from 'react-router-dom'
 import axios from "axios"
 
 const BoardList = () => {
@@ -69,7 +69,7 @@ const BoardList = () => {
                                     {boardList.data.map((item) => (
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
-                                            <td>{item.title}</td>
+                                            <td><Link to={`/board/detail/${item.id}`}>{item.title}</Link></td>
                                             <td>{item.name}</td>
                                             <td>{item.createdAt}</td>
                                             <td>{item.cnt}</td>
@@ -88,6 +88,8 @@ const BoardList = () => {
                     </div>
                 </div>
             </section>
+
+            <Outlet />
         </main>
     )
 }
