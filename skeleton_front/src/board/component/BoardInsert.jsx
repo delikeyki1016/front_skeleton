@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, {useCallback, useState} from 'react'
 import { useNavigate } from "react-router"
+import { Link } from "react-router-dom"
 
 const BoardInsert = ()=>{
     const navigate = useNavigate()
@@ -77,7 +78,9 @@ const BoardInsert = ()=>{
                                     </tr>
                                     <tr>
                                         <td colSpan="2" className="text-end">
-                                            <button type='reset' className="btn btn-primary btn-sm">취소</button>
+                                            {/* 입력한 내용 취소 */}
+                                            {/* <button type='reset' className="btn btn-primary btn-sm" onClick={()=>setData({name:'', title:'', content:''})}>취소</button> */}
+                                            <Link to='/board/list'><button type='button' className="btn btn-primary btn-sm">취소</button></Link>
                                             {" "}
                                             <button type='submit' className="btn btn-warning btn-sm" onClick={boardInsert}>입력</button>
                                         </td>

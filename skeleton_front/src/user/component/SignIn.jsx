@@ -67,7 +67,8 @@ const SignIn = ()=>{
                     </div>
                     <div className="col-sm12 position-relative form-group">
                         <button type="submit" className="btn btn-danger btn-sm" onClick={login}>LogIn</button>
-                        <button type="reset" className="btn btn-primary btn-sm">Reset</button>
+                        {" "}
+                        <button type="reset" className="btn btn-primary btn-sm" onClick={()=>setData({email:'', password:''})}>Reset</button>
                     </div>
                 </form>
             </div>
