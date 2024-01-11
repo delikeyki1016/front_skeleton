@@ -16,7 +16,10 @@ const SignIn = ()=>{
         console.log(data)
         const resp = await axios.post('http://localhost:8000/users/signin', data)
         if(resp.data.status === 500) window.alert(resp.data.message)
-        else navigate('/')
+        else {
+            navigate('/')
+            alert(`${resp.data.data.name}님 로그인되었습니다.`)
+        }
     }, [data, navigate])
 
     return (
