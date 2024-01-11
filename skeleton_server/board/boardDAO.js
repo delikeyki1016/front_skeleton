@@ -5,6 +5,8 @@ const sql = {
     boardList: 'SELECT * FROM board ORDER BY id DESC',
     insert: 'INSERT INTO board (name, title, content) VALUES (?, ?, ?)',
     board: 'SELECT * FROM board WHERE id = ?',
+    delete: 'DELETE FROM board WHERE id = ?',
+    update: 'UPDATE board SET title = ?, content = ? WHERE id = ?',
 }
 
 const boardDAO = {
@@ -51,6 +53,23 @@ const boardDAO = {
             console.log('Board select id DAO', id)
             const [resp] = await conn.query(sql.board, id) 
             // console.log(resp)
+            // where 조건에 의해 디비에서 하나의 row가 획득되는데, select문은 항상 여러건의 데이터를 획득할 수 있는 배열로 넘어온다. [{}]
+            callback({status:200, message: 'OK', data: resp[0]})
+        } catch(error) {
+            console.log(error)
+            return {status: 500, message: '해당 board 조회 실패', error: error}
+        } finally {
+            if(conn !== null) conn.release()
+        }
+    },
+
+    delete: async (id, callback) => {
+        let conn = null
+        try {
+            conn = await getPool().getConnection()
+            console.log('Board delete id DAO', id)
+            const [resp] = await conn.query(sql.delete, id) 
+            // console.log(resp)
             callback({status:200, message: 'OK', data: resp})
         } catch(error) {
             console.log(error)
@@ -58,7 +77,23 @@ const boardDAO = {
         } finally {
             if(conn !== null) conn.release()
         }
-    }
+    },
+
+    update: async (item, callback) => {
+        let conn = null
+        try {
+            conn = await getPool().getConnection()
+            console.log('업데이트 DAO', item)
+            const [resp] = await conn.query(sql.update, [item.title, item.content]) 
+            // console.log(resp)
+            callback({status:200, message: 'OK', data: resp})
+        } catch(error) {
+            console.log(error)
+            return {status: 500, message: '해당 board 수정 실패', error: error}
+        } finally {
+            if(conn !== null) conn.release()
+        }
+    },
 }
 
 module.exports = boardDAO

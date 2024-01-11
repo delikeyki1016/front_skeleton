@@ -30,7 +30,24 @@ router.get('/board/:id', function(req, res, next) {
     const { id } = req.params
     console.log('board/:id 호출', id)
     boardDAO.board(id, (resp) => {
-        res.send(resp)
+        res.json(resp)
+    })
+})
+
+// http://localhost:8000/boards/delete/8 
+router.post('/delete/:id', function(req, res, next) {
+    const { id } = req.params
+    console.log('delete/:id 호출', id)
+    boardDAO.delete(id, (resp) => {
+        res.json(resp)
+    })
+})
+
+// http://localhost:8000/boards/delete/8 
+router.post('/update', function(req, res, next) {
+    const data = req.body
+    boardDAO.boardDelete(id, (resp) => {
+        res.json(resp)
     })
 })
 
