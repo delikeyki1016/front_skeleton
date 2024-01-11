@@ -5,11 +5,28 @@ import { Link } from "react-router-dom"
 
 const BoardUpdate = ()=>{
     const navigate = useNavigate()
+
+    const {id} = useParams()
+
     //controlled component 
     const [data, setData] = useState({name:'', title:'', content:''})
 
-    // 컴포넌트가 나오자마자, 서버에서 데이터 획득
-    // 획득한 데이터가 화면에 출력
+    // 컴포넌트가 나오자마자, 서버에서 데이터 획득 후 화면에 출력
+    const getBoard = useCallback(async ()=>{
+        // 서버연동
+        const resp = await axios.get('http://localhost:8000/boards/board/'+id)
+        if(resp.data.status === 500) window.alert('게시물 조회 실패')
+        else {
+            setData(resp.data.data)
+        }
+    }, []) 
+
+    useEffect(()=>{
+        // 서버에서 최초에 한번만 데이터를 받아오면 된다.
+        getBoard()
+    }, []) 
+
+    
     // 유저가 수정한 것을 서버연동 
     const changeData = useCallback((e) => {
         setData({...data, [e.target.name]: e.target.value})

@@ -91,7 +91,7 @@ const BoardDetail = () => {
                                             onClick={()=>navigate('/board/list')}>목록</button>
                                             {" "}
                                             <button type='submit' className="btn btn-warning btn-sm" 
-                                            onClick={()=>navigate('/board/update/'+data.id)}>수정</button>
+                                            onClick={()=>navigate('/board/update/'+id)}>수정</button>
                                             {" "}
                                             <button type='submit' className="btn btn-warning btn-sm" 
                                             onClick={()=>deleteBoard(id)}>삭제</button>                                            

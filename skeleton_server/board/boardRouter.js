@@ -43,10 +43,11 @@ router.post('/delete/:id', function(req, res, next) {
     })
 })
 
-// http://localhost:8000/boards/delete/8 
+// http://localhost:8000/boards/update/8 
 router.post('/update', function(req, res, next) {
     const data = req.body
-    boardDAO.boardDelete(id, (resp) => {
+    console.log(data)
+    boardDAO.update(data, (resp) => {
         res.json(resp)
     })
 })

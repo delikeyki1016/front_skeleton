@@ -84,7 +84,7 @@ const boardDAO = {
         try {
             conn = await getPool().getConnection()
             console.log('업데이트 DAO', item)
-            const [resp] = await conn.query(sql.update, [item.title, item.content]) 
+            const [resp] = await conn.query(sql.update, [item.title, item.content, item.id]) 
             // console.log(resp)
             callback({status:200, message: 'OK', data: resp})
         } catch(error) {
