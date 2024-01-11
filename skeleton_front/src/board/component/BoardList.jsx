@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Link, Outlet, useMatch } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from "axios"
 
 const BoardList = () => {
@@ -88,8 +88,6 @@ const BoardList = () => {
                     </div>
                 </div>
             </section>
-
-            <Outlet />
         </main>
     )
 }

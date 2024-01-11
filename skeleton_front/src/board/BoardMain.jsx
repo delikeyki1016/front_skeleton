@@ -7,7 +7,6 @@ import BoardUpdate from './component/BoardUpdate'
 const BoardMain = () => {
     return (
         <div>
-            <h1>Board Main</h1>
             <Routes>
                 <Route path='/list' element={<BoardList />} />
                 <Route path='/insert' element={<BoardInsert />} />

@@ -12,14 +12,13 @@ const BoardDetail = () => {
     // 서버에서 받은 데이터를 상태데이터로 
     const [data, setData] = useState({name:'', title:'', content:'', createdAt:'', cnt: ''})
     
+    // 상세정보 get 함수 
     const getBoard = useCallback(async ()=>{
-        // 서버연동
+        // 서버 연동
         const resp = await axios.get('http://localhost:8000/boards/board/'+id)
-        console.log(resp)
+        // console.log(resp)
         if(resp.data.status === 500) window.alert('게시물 조회 실패')
-        else {
-            setData(resp.data.data)
-        }
+        else setData(resp.data.data)
     }, []) 
 
     useEffect(()=>{
@@ -27,12 +26,11 @@ const BoardDetail = () => {
         getBoard()
     }, []) //[getBoard] 로 써도 된다
 
+    // 삭제 함수
     const deleteBoard = useCallback(async (id) => {
         // 서버연동
-        const resp = await axios.post('http://localhost:8000/boards/delete/'+id)
-        console.log(resp)
-        if(resp.data.status === 500) window.alert('게시물 삭제 실패')
-        else navigate('/board/list')
+        await axios.post('http://localhost:8000/boards/delete/'+id)
+        navigate('/board/list')
     }, [])
 
     return (
@@ -89,11 +87,12 @@ const BoardDetail = () => {
                                             <button type='button' className="btn btn-primary btn-sm" 
                                             onClick={()=>navigate('/board/list')}>목록</button>
                                             {" "}
-                                            <button type='submit' className="btn btn-warning btn-sm" 
+                                            <button type='button' className="btn btn-warning btn-sm" 
                                             onClick={()=>navigate('/board/update/'+id)}>수정</button>
                                             {" "}
-                                            <button type='submit' className="btn btn-warning btn-sm" 
-                                            onClick={()=>deleteBoard(id)}>삭제</button>                                            
+                                            <button type='button' className="btn btn-warning btn-sm" 
+                                            onClick={()=>deleteBoard(id)}>삭제</button> 
+                                            {/* button type="submit" 의 경우 이벤트를 막지않으면 항상 브라우저를 갱신한다. */}
                                         </td>
                                     </tr>
                                 </tbody>

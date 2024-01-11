@@ -1,11 +1,9 @@
 import axios from "axios"
 import React, {useCallback, useState, useEffect} from 'react'
 import { useNavigate, useParams } from "react-router"
-import { Link } from "react-router-dom"
 
 const BoardUpdate = ()=>{
     const navigate = useNavigate()
-
     const {id} = useParams()
 
     //controlled component 
@@ -16,9 +14,7 @@ const BoardUpdate = ()=>{
         // 서버연동
         const resp = await axios.get('http://localhost:8000/boards/board/'+id)
         if(resp.data.status === 500) window.alert('게시물 조회 실패')
-        else {
-            setData(resp.data.data)
-        }
+        else setData(resp.data.data)
     }, []) 
 
     useEffect(()=>{
@@ -27,18 +23,19 @@ const BoardUpdate = ()=>{
     }, []) 
 
     
-    // 유저가 수정한 것을 서버연동 
+    // 유저가 수정한 것을 상태데이터에 업데이트 시키고  
     const changeData = useCallback((e) => {
         setData({...data, [e.target.name]: e.target.value})
     }, [data])
 
+    // 수정한 내용 서버에 post 
     const boardUpdate = useCallback(async (e)=>{
         e.preventDefault()
         console.log(data)
         // 서버연동
         const resp = await axios.post('http://localhost:8000/boards/update', data)
         if(resp.data.status === 500) window.alert('입력오류')
-        // board list로 화면전환
+        // 정상응답 후 board list로 화면전환
         else navigate('/board/list')
     }, [data, navigate])
 
@@ -75,12 +72,12 @@ const BoardUpdate = ()=>{
                         <div className="col-sm-12">
                             <table className="table">
                                 <tbody>
-                                    {/* <tr>
+                                    <tr>
                                         <td>이름</td>
                                         <td>
-                                            {}
+                                            {data.name}
                                         </td>
-                                    </tr> */}
+                                    </tr>
                                     <tr>
                                         <td>타이틀</td>
                                         <td>
@@ -97,12 +94,11 @@ const BoardUpdate = ()=>{
                                     </tr>
                                     <tr>
                                         <td colSpan="2" className="text-end">
-                                            {/* 입력한 내용 취소 */}
-                                            {/* <button type='reset' className="btn btn-primary btn-sm" onClick={()=>setData({name:'', title:'', content:''})}>취소</button> */}
-                                            {/* <Link to='/board/list'><button type='button' className="btn btn-primary btn-sm">취소</button></Link> */}
-                                            <button type='button' className="btn btn-primary btn-sm" onClick={()=>navigate('/board/list')}>취소</button>
+                                            <button type='button' className="btn btn-primary btn-sm" 
+                                            onClick={()=>navigate('/board/list')}>취소</button>
                                             {" "}
-                                            <button type='submit' className="btn btn-warning btn-sm" onClick={boardUpdate}>수정</button>
+                                            <button type='button' className="btn btn-warning btn-sm" 
+                                            onClick={boardUpdate}>수정</button>
                                         </td>
                                     </tr>
                                 </tbody>

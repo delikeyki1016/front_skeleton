@@ -1,7 +1,6 @@
 import axios from "axios"
 import React, {useCallback, useState} from 'react'
 import { useNavigate } from "react-router"
-import { Link } from "react-router-dom"
 
 const BoardInsert = ()=>{
     const navigate = useNavigate()

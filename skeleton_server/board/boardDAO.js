@@ -34,7 +34,7 @@ const boardDAO = {
         let conn = null
         try {
             conn = await getPool().getConnection()
-            console.log('Board Insert DAO', item)
+            console.log('입력 DAO', item)
             const [resp] = await conn.query(sql.insert, [item.name, item.title, item.content]) 
             // console.log(resp)
             callback({status:200, message: 'OK', data: resp})
@@ -50,7 +50,7 @@ const boardDAO = {
         let conn = null
         try {
             conn = await getPool().getConnection()
-            console.log('Board select id DAO', id)
+            console.log('상세보기 DAO id:', id)
             const [resp] = await conn.query(sql.board, id) 
             // console.log(resp)
             // where 조건에 의해 디비에서 하나의 row가 획득되는데, select문은 항상 여러건의 데이터를 획득할 수 있는 배열로 넘어온다. [{}]
@@ -67,13 +67,13 @@ const boardDAO = {
         let conn = null
         try {
             conn = await getPool().getConnection()
-            console.log('Board delete id DAO', id)
+            console.log('삭제 DAO id:', id)
             const [resp] = await conn.query(sql.delete, id) 
             // console.log(resp)
-            callback({status:200, message: 'OK', data: resp})
+            callback({status:200, message: 'OK', data: resp}) //  data: resp 데이터 전달은 안해도 된다.
         } catch(error) {
             console.log(error)
-            return {status: 500, message: '해당 board 조회 실패', error: error}
+            return {status: 500, message: '해당 board 삭제 실패', error: error}
         } finally {
             if(conn !== null) conn.release()
         }
@@ -83,10 +83,10 @@ const boardDAO = {
         let conn = null
         try {
             conn = await getPool().getConnection()
-            console.log('업데이트 DAO', item)
+            console.log('업데이트 DAO item:', item)
             const [resp] = await conn.query(sql.update, [item.title, item.content, item.id]) 
             // console.log(resp)
-            callback({status:200, message: 'OK', data: resp})
+            callback({status:200, message: 'OK', data: resp}) //  data: resp 데이터 전달은 안해도 된다.
         } catch(error) {
             console.log(error)
             return {status: 500, message: '해당 board 수정 실패', error: error}
