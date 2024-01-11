@@ -51,8 +51,7 @@ const BoardInsert = ()=>{
             <section className="property-grid grid">
                 <div className="container">
                     <div className="row">
-                        <div className="col-sm-12">
-                        <form className="row">
+                        <div className="col-sm-12">                        
                             <table className="table">
                                 <tbody>
                                     <tr>
@@ -87,8 +86,7 @@ const BoardInsert = ()=>{
                                         </td>
                                     </tr>
                                 </tbody>
-                            </table>
-                            </form>
+                            </table>                            
                         </div>
                     </div>
                 </div>

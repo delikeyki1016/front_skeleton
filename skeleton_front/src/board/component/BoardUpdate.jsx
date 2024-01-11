@@ -73,7 +73,6 @@ const BoardUpdate = ()=>{
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12">
-                        <form className="row">
                             <table className="table">
                                 <tbody>
                                     {/* <tr>
@@ -108,7 +107,6 @@ const BoardUpdate = ()=>{
                                     </tr>
                                 </tbody>
                             </table>
-                            </form>
                         </div>
                     </div>
                 </div>
